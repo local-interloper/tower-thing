@@ -9,7 +9,7 @@ NPC::NPC(Engine &engine, Node *spawn) : Entity(engine), _target(spawn) {
     _target = spawn->Next;
 }
 
-void NPC::Think() {
+void NPC::Think(float delta) {
     if (Vector2Distance(Position, _target->Position) < _step) {
         if (_target->Next == nullptr) {
             QueueFree();
@@ -27,7 +27,7 @@ void NPC::Think() {
 }
 
 
-void NPC::Render() {
+void NPC::Render(float delta) {
     DrawTexturePro(
             _sprite,
             Rectangle{0, 0, 16, 16},

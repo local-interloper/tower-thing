@@ -13,7 +13,7 @@ public:
 
     Node *Next;
 
-    void Render() override;
+    void Render(float delta) override;
 };
 
 #endif //PATHFINDER_NODE_H

@@ -3,7 +3,7 @@
 
 Node::Node(Engine &engine, Vector2 position) : Entity(engine, position), Next(nullptr) {}
 
-void Node::Render() {
+void Node::Render(float delta) {
     if(!_engine.DrawDebugGraphics) {
         return;
     }

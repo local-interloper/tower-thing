@@ -9,8 +9,8 @@ void Engine::Start() {
     SetTargetFPS(60);
 
     // SETUP
-    activeScene = new Devscene(*this);
-    activeScene->Init();
+    scene = new Devscene(*this);
+    scene->Init();
     // SETUP
 
     Mainloop();
@@ -18,24 +18,28 @@ void Engine::Start() {
 
 void Engine::Mainloop() {
     while (!WindowShouldClose()) {
-        Render();
-        Think();
-        FreeQueued();
+        float delta = GetFrameTime();
+        Render(delta);
+        Think(delta);
+
+        if (scene != nullptr) {
+            scene->FreeQueued();
+        }
     }
 }
 
-void Engine::Think() {
+void Engine::Think(float delta) {
     if (IsKeyPressed(KEY_F3)) {
         DrawDebugGraphics = !DrawDebugGraphics;
     }
 
-    activeScene->Think();
+    scene->Think(delta);
 }
 
-void Engine::Render() {
+void Engine::Render(float delta) {
     BeginDrawing();
     ClearBackground(BLACK);
-    activeScene->Render();
+    scene->Render(delta);
     DrawText("pathfinder", 5, 5, 15, WHITE);
     if (DrawDebugGraphics) {
         DrawText("[Debug Graphics]", 5, 25, 15, WHITE);
@@ -43,16 +47,11 @@ void Engine::Render() {
     EndDrawing();
 }
 
-void Engine::QueueFree(unsigned long id) const {
-    activeScene->FreeQueue.push(id);
+void Engine::QueueFree(unsigned long int id) {
+    if (scene == nullptr) {
+        return;
+    }
+
+    scene->QueueFree(id);
 }
 
-void Engine::FreeQueued() const {
-    while (!activeScene->FreeQueue.empty()) {
-        unsigned long int id = activeScene->FreeQueue.front();
-        delete activeScene->Entities[id];
-        activeScene->Entities[id] = nullptr;
-        activeScene->Entities.erase(id);
-        activeScene->FreeQueue.pop();
-    }
-}

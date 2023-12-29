@@ -22,11 +22,15 @@ public:
 
     virtual void Init();
 
-    virtual void Think();
+    virtual void Think(float delta);
 
-    virtual void Render();
+    virtual void Render(float delta);
 
     void SpawnEntity(Entity *entity);
+
+    void QueueFree(unsigned long int id);
+
+    void FreeQueued();
 };
 
 #endif //PATHFINDER_SCENE_H

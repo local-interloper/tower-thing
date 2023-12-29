@@ -14,9 +14,9 @@ private:
 public:
     NPC(Engine &engine, Node* spawn);
 
-    void Think() override;
+    void Think(float delta) override;
 
-    void Render() override;
+    void Render(float delta) override;
 };
 
 #endif //PATHFINDER_NPC_H

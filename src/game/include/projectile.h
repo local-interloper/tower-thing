@@ -12,8 +12,8 @@ private:
 public:
     Projectile(Engine& engine, Vector2 position, Entity *target);
 
-    void Think() override;
-    void Render() override;
+    void Think(float delta) override;
+    void Render(float delta) override;
 };
 
 #endif //PATHFINDER_PROJECTILE_H

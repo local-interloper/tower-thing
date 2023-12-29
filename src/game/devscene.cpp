@@ -44,12 +44,12 @@ void Devscene::Init() {
 
 }
 
-void Devscene::Render() {
+void Devscene::Render(float delta) {
     DrawTextureEx(_backgroundTexture, Vector2{0, 0}, 0, 4, WHITE);
-    Scene::Render();
+    Scene::Render(delta);
 }
 
-void Devscene::Think() {
+void Devscene::Think(float delta) {
     if (IsKeyPressed(KEY_S)) {
         SpawnEntity(new NPC(_engine, _nodes[0]));
     }
@@ -59,5 +59,5 @@ void Devscene::Think() {
         SpawnEntity(new Tower(_engine, pos));
     }
 
-    Scene::Think();
+    Scene::Think(delta);
 }

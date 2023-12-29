@@ -17,9 +17,9 @@ public:
 
     void Init() override;
 
-    void Render() override;
+    void Render(float delta) override;
 
-    void Think() override;
+    void Think(float delta) override;
 };
 
 #endif //PATHFINDER_DEVSCENE_H

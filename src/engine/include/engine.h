@@ -16,7 +16,7 @@ using std::queue;
 class Engine {
 
 public:
-    Scene *activeScene;
+    Scene *scene;
     AssetServer assetServer;
 
     bool DrawDebugGraphics = false;
@@ -25,14 +25,11 @@ public:
 
     void Mainloop();
 
-    void Render();
+    void Render(float delta);
 
-    void Think();
+    void Think(float delta);
 
-    void SpawnEntity(Entity *entity);
-    void QueueFree(unsigned long int id) const;
-
-    void FreeQueued() const;
+    void QueueFree(unsigned long int id);
 };
 
 #endif //OGRESBOX_ENGINE_H

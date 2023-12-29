@@ -2,7 +2,7 @@
 
 Projectile::Projectile(Engine &engine, Vector2 position, Entity* target) : Entity(engine, position), _target(target) {}
 
-void Projectile::Think() {
+void Projectile::Think(float delta) {
     if(_target == nullptr) {
         QueueFree();
         return;
@@ -16,6 +16,6 @@ void Projectile::Think() {
     }
 }
 
-void Projectile::Render() {
+void Projectile::Render(float delta) {
     DrawCircle(Position.x, Position.y, 5, RED);
 }

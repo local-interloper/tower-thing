@@ -16,9 +16,9 @@ public:
 
     Vector2 Position;
 
-    virtual void Think();
+    virtual void Think(float delta);
 
-    virtual void Render();
+    virtual void Render(float delta);
 
     void SetId(unsigned long int id);
 

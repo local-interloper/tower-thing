@@ -10,13 +10,13 @@ Tower::Tower(Engine &engine, Vector2 position) : Entity(engine, position) {
     _sprite = _engine.assetServer.textures["tex_tower"];
 }
 
-void Tower::Think() {
+void Tower::Think(float delta) {
     if (_fireDelay > 0) {
-        _fireDelay -= GetFrameTime();
+        _fireDelay -= delta;
     }
 
     if (_target == nullptr) {
-        for (auto pair: _engine.activeScene->Entities) {
+        for (auto pair: _engine.scene->Entities) {
             auto npc = dynamic_cast<NPC *>(pair.second);
             if (npc == nullptr) {
                 continue;
@@ -39,7 +39,7 @@ void Tower::Think() {
     }
 
     if (_fireDelay <= 0) {
-        _engine.activeScene->SpawnEntity(new Projectile(_engine, Position, _target));
+        _engine.scene->SpawnEntity(new Projectile(_engine, Position, _target));
         _fireDelay = _fireRate;
     }
 
@@ -51,7 +51,7 @@ void Tower::Think() {
     _target = nullptr;
 }
 
-void Tower::Render() {
+void Tower::Render(float delta) {
     DrawTexturePro(
             _sprite,
             Rectangle{16, 0, 16, 16},

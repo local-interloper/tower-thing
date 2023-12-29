@@ -1,11 +1,12 @@
 #ifndef PATHFINDER_TOWER_H
 #define PATHFINDER_TOWER_H
+
 #include "npc.h"
 #include "projectile.h"
 
 class Tower : public Entity {
 private:
-    NPC* _target;
+    NPC *_target;
     Texture2D _sprite;
     float _range = 60;
     float _fireRate = 1;
@@ -15,7 +16,9 @@ private:
 public:
     Tower(Engine &engine, Vector2 position);
 
-    void Think() override;
-    void Render() override;
+    void Think(float delta) override;
+
+    void Render(float delta) override;
 };
+
 #endif //PATHFINDER_TOWER_H
